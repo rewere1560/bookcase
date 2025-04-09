@@ -1,0 +1,71 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="container my-3 mar">
+    <h2 class="border-bottom py-2" th:text="도서"></h2>
+    <div class="row my-3">
+        <div class="col-1">
+            <a th:href="@{/book/list}"
+               class="nav-link" style="color: gray" th:text="책장"></a>
+        </div>
+        <div th:if="${fromCollection} != null" class="col-1">
+            <a th:href="@{|/collection/detail/${fromCollection}?collectionList=${from}|}"
+               class="nav-link" style="color: gray" th:text="이전" th:title="|${collection.name}으로 이동|"></a>
+        </div>
+    </div>
+    <div class="card my-3">
+        <div class="card-body">
+            <h4 class="py-2" th:text="|제목: ${book.title}|"></h4>
+            <h4 th:if="${book.author != null}" th:text="|저자: ${book.author}|"></h4>
+            <!--      <h4 th:text="${#temporals.format(book.first_publication, 'yyyy-MM-dd HH:mm')}">-->
+        </div>
+    </div>
+    <!--  todo: 추천-->
+    <div class="my-3 d-flex justify-content-between">
+        <div>
+            <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
+               th:data-uri="@{|/book/recommend/${book.id}|}">
+                추천
+                <!--        <span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voter)}"></span>-->
+            </a>
+<!--            <button sec:authorize="isAuthenticated()" id="openModalBtn" class="collect btn btn-sm btn-outline-secondary">-->
+<!--                묶기-->
+<!--                &lt;!&ndash;        <span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voter)}"></span>&ndash;&gt;-->
+<!--            </button>-->
+        </div>
+    </div>
+
+<!--    <div id="modal" class="modal">-->
+<!--        <div class="modal-content">-->
+<!--            <span id="closeModalBtn" class="close-btn">&times;</span>-->
+<!--            <h2 style="margin-left: 10%">선택 목록</h2>-->
+<!--            <form style="margin-left: 20%">-->
+<!--                <select id="collection" class="form-select" onchange="this.form.submit();">-->
+<!--                    <option value="" th:text="'현재: ' + ${target}">새로 선택</option>-->
+<!--                    <option th:each="collection : ${collectionList}"-->
+<!--                            th:text="${collection.name()}" th:value="${collection.name()}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--                <input type="submit" value="등록하기" class="button">-->
+<!--            </form>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div th:replace="~{select_menu :: selectMenuFragment}"></div>-->
+
+    <form th:object="${selectBookForm}" th:action="@{|/book/select|}" method="post">
+<!--        todo:book값 전달-->
+        <input type="hidden" th:field="*{book}">
+        <input type="submit" value="묶기" class="button">
+    </form>
+</div>
+<script layout:fragment="script" type='text/javascript'>
+    const recommend_elements = document.getElementsByClassName("recommend");
+      Array.from(recommend_elements).forEach(function(element) {
+          element.addEventListener('click', function() {
+              if(confirm("정말로 추천하시겠습니까?")) {
+                  location.href = this.dataset.uri;
+              }
+          });
+      });
+</script>
+</html>

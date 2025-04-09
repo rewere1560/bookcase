@@ -1,0 +1,92 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="container mar">
+    <div class="border-bottom py-2">
+        <h2 th:text="${collection.name}"></h2>
+<!--        <div class="d-flex justify-content-between">-->
+        <div class="d-flex justify-content-start n-select">
+            <div>
+                <h2 class="badge bg-secondary">
+                    <span th:if="${collection.owner != null}" th:text="${collection.owner.username}"></span>
+                </h2>
+            </div>
+            <div th:if="${collection.releaseYN} == true" class="mx-1">
+                <h5 class="badge bg-secondary" th:text="공개"></h5>
+            </div>
+            <div th:if="${collection.releaseYN} == false" class="mx-1">
+                <h5 class="badge bg-secondary" th:text="비공개"></h5>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row my-3">
+        <div th:if="${from != null and from == 'myCollection'}" class="">
+            <a th:href="@{/collection/list}"
+               class="nav-link" style="color: gray" th:text="'이전'" title="내 묶음으로 이동"></a>
+        </div>
+        <div th:if="${from != null and from == 'publicCollectionList'}" class="n-select">
+            <a th:href="@{/collection/list/public}"
+               class="nav-link" style="color: gray" th:text="'이전'" title="공개된 묶음으로 이동"></a>
+        </div>
+        <div th:if="${from == null or from == ''}" class="n-select">
+            <a th:href="@{/collection/list/public}"
+               class="nav-link" style="color: gray" th:text="'공개 묶음'" title="공개된 묶음으로 이동"></a>
+        </div>
+        <!--        <div th:if="${fromPublicCollectionList} != null" class="col-1">-->
+        <!--            <a th:href="@{/collection/list/public}"-->
+        <!--               class="nav-link" style="color: gray" text="이전" title="공개 묶음 리스트로 이동"></a>-->
+        <!--        </div>-->
+    </div>
+
+
+
+
+    <div th:if="${collectionBookList != null and collectionBookList.size() > 0}" class="d-flex justify-content-start">
+        <div th:each="collectionBook, loop : ${collectionBookList}" class="book n-select">
+            <!--            <h2 th:text="${collection.name}">텍스트</h2>-->
+            <!--&lt;!&ndash;            <h2 th:text="${loop}"></h2>&ndash;&gt;-->
+            <a th:href="@{|/book/detail?id=${collectionBook.book.id}&collection=${collection.id}&collectionList=${from}|}">
+                <div th:text="|제목: ${collectionBook.book.title}|" style="text-align: left"></div>
+                <div th:text="|저자: ${collectionBook.book.author}|" style="text-align: left"></div>
+            </a>
+        </div>
+    </div>
+    <div th:if="${collectionBookList == null or collectionBookList.size() == 0}">
+        <h5 class="my-3 pb-2">추가된 도서가 없습니다.</h5>
+    </div>
+
+    <div class="my-3 d-flex justify-content-between">
+        <div>
+            <a th:href="@{/collection/add/book}" class="btn btn-sm btn-outline-secondary"
+               sec:authorize="isAuthenticated()"
+               th:if="${collection.owner != null and #authentication.getPrincipal().getUsername() == collection.owner.username}"
+               th:text="추가하기"></a>
+            <a th:href="@{|/collection/modify/${collection.id}|}" class="btn btn-sm btn-outline-secondary mx-1"
+               sec:authorize="isAuthenticated()"
+               th:if="${collection.owner != null and #authentication.getPrincipal().getUsername() == collection.owner.username}"
+               th:text="수정"></a>
+            <!--            <a href="javascript:void(0);" th:data-uri="@{|/collection/delete/${collection.id}|}"-->
+            <!--               class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"-->
+            <!--               th:if="${collection.owner != null and #authentication.getPrincipal().getUsername() == collection.owner.username}"-->
+            <!--               th:text="삭제"></a>-->
+        </div>
+
+    </div>
+
+    <div class="row my-3">
+
+    </div>
+</div>
+<script layout:fragment="script" type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete")
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            }
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,47 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="container mar">
+    <h2>hello</h2>
+
+
+
+    <div class="button">
+        <div class="mb-3">
+            <h5>h2-console</h5>
+            <div class="pb-2">
+                <a href="http://localhost:2580/h2-console" target="blank">h2-console</a>
+            </div>
+        </div>
+        <div class="mb-3">
+            <h5>개체 생성</h5>
+            <div class="pb-2">
+                <a th:href="@{/recommend/select}" title="추천 페이지">추천(추천 개체)</a>
+                <a th:href="@{/book/enroll}">책 등록</a>
+                <a th:href="@{/collection/create}">내 도서 묶음 생성</a>
+
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <h5>개체 리스트</h5>
+            <div class="pb-2">
+                <a th:href="@{/book/list}">책장</a>
+                <a th:href="@{/collection/list}">내 도서 묶음</a>
+                <a th:href="@{/collection/list/public}">공개된 도서 묶음</a>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <h5>개체 이용</h5>
+            <div class="pb-2">
+                <a th:href="@{/recommend/select}" title="추천 페이지">추천</a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+</html>

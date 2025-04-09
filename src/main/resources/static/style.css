@@ -1,0 +1,147 @@
+/*.main {*/
+/*    width: auto;              !* 내용에 따라 너비 자동 조정 *!*/
+/*    height: auto;             !* 내용에 따라 높이 자동 조정 *!*/
+/*    !*    width: 100%;        가로 크기 *!*/
+/*    !*    height: 200px;       세로 크기 *!*/
+/*    text-align: right;  !* 텍스트 오른쪽 정렬 *!*/
+/*    background-color: #e2e2e2;  !* 배경색 설정 *!*/
+/*    border-radius: 5px;  !* 둥근 모서리 *!*/
+/*    border: 2px solid black;  !* 테두리 설정 *!*/
+/*    padding: 10px;      !* 내부 여백 설정 *!*/
+/*    box-sizing: border-box;  !* 테두리와 패딩을 포함한 크기 계산 *!*/
+/*    margin-top: 20px;*/
+/*}*/
+
+div.mar {
+    margin-top: 25px;
+    margin-right: 75px;
+    margin-left: 75px;
+
+}
+
+.n-select {
+    user-select: none;        /* 텍스트 드래그 방지 */
+}
+a.nn{
+    text-decoration: none;
+    color: black;
+}
+
+.button a {
+    display: inline-block;  /* 링크를 블록처럼 표시 */
+    padding: 8px 12px;  /* 버튼 안의 여백 설정 */
+    background-color: #333;  /* 배경색 설정 */
+    color: white;  /* 텍스트 색상 설정 */
+    text-align: center;  /* 텍스트 가운데 정렬 */
+    text-decoration: none;  /* 링크 밑줄 제거 */
+    border: 2px solid transparent;  /* 기본 테두리를 투명하게 설정 (호버 시 border가 나타나도록) */
+    border-radius: 5px;  /* 둥근 모서리 */
+    font-size: 14px;  /* 글자 크기 설정 */
+    cursor: pointer;  /* 마우스를 올렸을 때 커서를 포인터로 변경 */
+    transition: background-color 0.3s ease, border 0.3s ease;  /* 배경색과 테두리 변화 부드럽게 설정 */
+    box-sizing: border-box;  /* padding과 border를 포함하여 크기를 계산하도록 설정 */
+}
+
+/* 마우스를 올렸을 때 버튼 색상 변경 */
+.button a:hover {
+    background-color: #ddd;  /* 호버 시 배경색 변경 */
+    color: black;
+    border: 2px solid black;  /* 호버 시 테두리 추가 */
+}
+
+/* 마우스를 클릭할 때 버튼이 눌리는 효과 */
+.button a:active {
+    background-color: #ddd;  /* 클릭 시 배경색 변경 */
+    color: black;
+    border: 2px solid black;  /* 클릭 시 테두리 추가 */
+}
+
+.no_drag {
+    user-select: none;
+}
+
+.collection a {
+    display: inline-block;  /* 링크를 블록처럼 표시 */
+    padding: 8px 12px;  /* 버튼 안의 여백 설정 */
+    margin-right: 10px;
+    color: black;
+    text-decoration: none;  /* 링크 밑줄 제거 */
+    border: 2px solid transparent;  /* 기본 테두리를 투명하게 설정 (호버 시 border가 나타나도록) */
+    border-radius: 5px;  /* 둥근 모서리 */
+    font-size: 14px;  /* 글자 크기 설정 */
+    text-align: left
+    cursor: pointer;  /* 마우스를 올렸을 때 커서를 포인터로 변경 */
+    border: 2px solid black;  /* 호버 시 테두리 추가 */
+    transition: background-color 0.3s ease, border 0.3s ease;  /* 배경색과 테두리 변화 부드럽게 설정 */
+    box-sizing: border- box;  /* padding과 border를 포함하여 크기를 계산하도록 설정 */
+}
+
+
+.wrap-vertical{
+  width: 500px;
+  padding: 20px;
+  overflow: scroll;
+  color: white;
+  border: 2px #A98B59;
+  background: ##dcdcdc;
+  border: 1px solid #000;
+   /* 가로 스크롤 */
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.book-case{
+margin-right: 10px;
+}
+
+.select-box{
+    display: inline-block;  /* 블록처럼 표시 */
+    padding: 8px 12px;  /* 버튼 안의 여백 설정 */
+    background-color: white;  /* 배경색 설정 */
+    color: black;  /* 텍스트 색상 설정 */
+    text-align: center;  /* 텍스트 가운데 정렬 */
+    border: 2px solid transparent;  /* 기본 테두리를 투명하게 설정 (호버 시 border가 나타나도록) */
+    border-radius: 5px;  /* 둥근 모서리 */
+    border: 2px solid black;
+    font-size: 14px;  /* 글자 크기 설정 */
+    cursor: pointer;  /* 마우스를 올렸을 때 커서를 포인터로 변경 */
+    transition: background-color 0.3s ease, border 0.3s ease;  /* 배경색과 테두리 변화 부드럽게 설정 */
+    box-sizing: border-box;  /* padding과 border를 포함하여 크기를 계산하도록 설정 */
+}
+
+.book a,
+.book button {
+    display: inline-block;  /* 블록처럼 표시 */
+    padding: 8px 12px;  /* 버튼 안의 여백 설정 */
+    margin-right: 10px;
+    background-color: white;  /* 배경색 설정 */
+    color: black;  /* 텍스트 색상 설정 */
+    border: 2px solid transparent;  /* 기본 테두리를 투명하게 설정 (호버 시 border가 나타나도록) */
+    border-radius: 5px;  /* 둥근 모서리 */
+    border: 2px solid black;
+    font-size: 14px;  /* 글자 크기 설정 */
+    cursor: pointer;  /* 마우스를 올렸을 때 커서를 포인터로 변경 */
+    transition: background-color 0.3s ease, border 0.3s ease;  /* 배경색과 테두리 변화 부드럽게 설정 */
+    box-sizing: border-box;  /* padding과 border를 포함하여 크기를 계산하도록 설정 */
+    text-decoration: none;
+}
+
+
+
+/* 마우스를 올렸을 때 버튼 색상 변경 */
+.book a:hover,
+.book button:hover {
+    background-color: #ddd;  /* 호버 시 배경색 변경 */
+    color: black;
+    border: 2px solid black;  /* 호버 시 테두리 추가 */
+}
+
+/* 마우스를 클릭할 때 버튼이 눌리는 효과 */
+.book a:active,
+.book button:active {
+    background-color: #ddd;  /* 클릭 시 배경색 변경 */
+    color: black;
+    border: 2px solid black;  /* 클릭 시 테두리 추가 */
+}
+
+

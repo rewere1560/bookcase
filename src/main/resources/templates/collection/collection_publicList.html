@@ -1,0 +1,37 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="container mar">
+    <h2 class="border-bottom py-2">공개된 묶음</h2>
+    <div class="row my-3">
+        <div class="col-6">
+            <div class="button">
+                <a th:href="@{/collection/create}">묶음 생성하기</a>
+            </div>
+        </div>
+        <!--        <div class="col-6">-->
+        <!--            <div class="input-group">-->
+        <!--                <input type="text" id="search_kw" class="form-control" th:value="${kw}">-->
+        <!--                <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>-->
+        <!--            </div>-->
+        <!--        </div>-->
+    </div>
+
+    <div th:if="${publicCollectionList != null and publicCollectionList.size() > 0}">
+        <h5 class="my-3 pb-2">공개된 묶음이 있습니다.</h5>
+        <!--        <h5 th:text="${collectionList.get(0).name}"></h5>-->
+        <div class="d-flex justify-content-start">
+            <div th:each="collection, loop : ${publicCollectionList}" class="collection">
+                <!--            <h2 th:text="${collection.name}">텍스트</h2>-->
+                <!--&lt;!&ndash;            <h2 th:text="${loop}"></h2>&ndash;&gt;-->
+                <a th:href="@{|/collection/detail/${collection.id}?collectionList=publicCollectionList|}">
+                    <div th:text="|이름: ${collection.name}|"></div>
+                    <div th:text="|소유자: ${collection.owner.username}|"></div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div th:if="${publicCollectionList == null or publicCollectionList.size() == 0}">
+        <h5 class="my-3 pb-2">공개된 묶음이 없습니다.</h5>
+    </div>
+</div>
+</html>

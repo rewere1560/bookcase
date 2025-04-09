@@ -1,0 +1,24 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="container mar">
+    <h2>임시 텍스트</h2>
+    <h5 class="my-3 border-bottom pb-2">추천</h5>
+<!--    onchange="submitForm()"   -->
+    <form th:object="${recommendForm}" th:action="@{/recommend/select}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div class="mb-3">
+            <label for="recommendTarget" class="form-label">추천 대상</label>
+            <select id="recommendTarget" th:field="*{recommendTarget}" class="form-select" onchange="this.form.submit();">
+                <option value="">선택</option> <!-- 기본값으로 "카테고리 없음"을 추가 -->
+                <option th:each="type : ${recommendationTypes}"
+                        th:text="${type.name()}" th:value="${type.name()}">
+<!--                    <span th:if="${type == T(com.example.RecommendationType0).BOOK}" th:text="'책'"></span>-->
+<!--                    <span th:if="${type == T(com.example.RecommendationType0).AUTHOR}" th:text="'저자'"></span>-->
+<!--                    <span th:if="${type == T(com.example.RecommendationType0).OTHER}" th:text="'기타'"></span>-->
+                    <!-- 추가적인 enum 값에 대한 처리 -->
+                </option>
+            </select>
+        </div>
+    </form>
+</div>
+</html>
