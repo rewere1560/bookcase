@@ -12,6 +12,8 @@
     <!-- modal css -->
     <link rel="stylesheet" type="text/css" th:href="@{/modal.css}">
 
+    <link rel="stylesheet" type="text/css" th:href="@{/my_linear_gradient.css}">
+
     <style>
         a.nn{
         text-decoration: none;
@@ -20,11 +22,11 @@
     </style>
     <title>Hello!</title>
 </head>
-<body>
+<body >
 <!-- 네비게이션바 -->
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<th:block layout:fragment="content"></th:block>
+<th:block th:id="my_gradient_2" th:class="grad" layout:fragment="content"></th:block>
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
 
 <!-- Bootstrap JS -->

@@ -1,0 +1,71 @@
+.grad {
+  width: 800px;
+  height: auto;
+  margin-top: 37px;
+  margin-right: 75px;
+  margin-left: 75px;
+  padding: 20px;
+  border-radius: 10px;  /* 둥근 모서리 */
+}
+
+
+
+#back {
+    background-image: linear-gradient(rgb(89, 208, 255), rgb(255,255,255));
+    }
+
+
+#my_gradient_1 {
+    background-image: linear-gradient(to right, rgb(89, 208, 255), transparent);
+}
+
+#my_gradient_2 {
+    background-color: rgb(226, 219, 205);
+    border: 2px solid rgb(140, 118, 81);
+}
+
+
+.my_gradient_1 {
+    background-image: linear-gradient(to bottom, red, yellow);
+    height: 200px;
+}
+
+.my_gradient_2 {
+   background-image: linear-gradient(to top, red, yellow);
+   height: 200px;
+}
+
+.my_gradient_3 {
+    background-image: linear-gradient(to right, red, yellow);
+    height: 200px;
+}
+.my_gradient_4 {
+    background-image: linear-gradient(to left, red, yellow);
+    height: 200px;
+}
+
+.my_gradient_5 {
+    background-image: linear-gradient(to bottom right, red, yellow);
+    height: 200px;
+}
+
+.my_gradient_6 {
+    background-image: linear-gradient(to bottom left, red, yellow);
+    height: 200px;
+}
+
+.my_gradient_7 {
+    background-image: linear-gradient(to top right, red, yellow);
+    height: 200px;
+}
+
+.my_gradient_8 {
+    background-image: linear-gradient(to top left, red, yellow);
+    height: 200px;
+}
+
+.outer_div {
+    width: 400px;
+    float: left;
+    border: 1px solid;
+}

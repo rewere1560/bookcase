@@ -11,6 +11,61 @@
 /*    box-sizing: border-box;  !* 테두리와 패딩을 포함한 크기 계산 *!*/
 /*    margin-top: 20px;*/
 /*}*/
+.input-wrapper {
+      position: relative;
+      width: 300px;
+}
+
+    .clear-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform:translateY(-50%);
+      cursor: pointer;
+      display: none;
+      font-size: 18px;
+      color: #888;
+    }
+
+    .input-wrapper:hover .clear-btn.show {
+      display: block;
+    }
+
+
+.sub_button {
+     position: relative;
+     top:50%;
+     background-color:rgb(214 189 136);
+     color: #ffffff;
+     border:none;
+     border-radius:100px;
+     border: 2px solid transparent;
+     padding: 7px;
+     min-height:20px;
+     min-width: 80px;
+     font-size: 13px;
+ }
+
+.add_button {
+    position: relative;
+    top:50%;
+    background-color:rgb(209, 183, 133);
+    color: #fff;
+    border:none;
+    border-radius:10px;
+    border: 2px solid transparent;
+    padding: 7px;
+    min-height:30px;
+    min-width: 80px;
+    font-size: 15px;
+}
+
+.add_button:hover,
+ sub_button:hover{
+    background-color: rgb(239, 235, 226);  /* 호버 시 배경색 변경 */
+    color: black;
+    border: 2px solid rgb(140, 118, 81);  /* 호버 시 테두리 추가 */
+}
 
 div.mar {
     margin-top: 25px;
@@ -30,7 +85,7 @@ a.nn{
 .button a {
     display: inline-block;  /* 링크를 블록처럼 표시 */
     padding: 8px 12px;  /* 버튼 안의 여백 설정 */
-    background-color: #333;  /* 배경색 설정 */
+    background-color: rgb(209, 183, 133);  /* 배경색 설정 */
     color: white;  /* 텍스트 색상 설정 */
     text-align: center;  /* 텍스트 가운데 정렬 */
     text-decoration: none;  /* 링크 밑줄 제거 */
@@ -44,16 +99,16 @@ a.nn{
 
 /* 마우스를 올렸을 때 버튼 색상 변경 */
 .button a:hover {
-    background-color: #ddd;  /* 호버 시 배경색 변경 */
+    background-color: rgb(239, 235, 226);  /* 호버 시 배경색 변경 */
     color: black;
-    border: 2px solid black;  /* 호버 시 테두리 추가 */
+    border: 2px solid rgb(140, 118, 81);  /* 호버 시 테두리 추가 */
 }
 
 /* 마우스를 클릭할 때 버튼이 눌리는 효과 */
 .button a:active {
     background-color: #ddd;  /* 클릭 시 배경색 변경 */
     color: black;
-    border: 2px solid black;  /* 클릭 시 테두리 추가 */
+    border: 2px solid rgb(140, 118, 81);  /* 클릭 시 테두리 추가 */
 }
 
 .no_drag {
