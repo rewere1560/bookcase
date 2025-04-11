@@ -40,7 +40,7 @@ public class Book {
 
     private String publisher;
 
-    private LocalDate firstPublication;
+    private LocalDateTime firstPublication;
 
     @Column(length = 17, unique = true)
     private String isbn;

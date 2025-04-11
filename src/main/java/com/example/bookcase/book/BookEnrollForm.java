@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -34,6 +35,6 @@ public class BookEnrollForm {
     private String publisher;
 
     @NotNull(message="날짜는 필수항목입니다.")
-    private LocalDate first_publication;
+    private LocalDateTime first_publication;
 
 }

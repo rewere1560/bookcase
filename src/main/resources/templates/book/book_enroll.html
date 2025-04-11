@@ -33,29 +33,13 @@
         </div>
         <div class="mb-3">
             <label for="first_publication" class="form-label">발행일</label>
-            <input type="date" id="first_publication" th:field="*{first_publication}" class="form-control">
+            <input type="datetime-local" id="first_publication" th:field="*{first_publication}" class="form-control">
         </div>
 
         <input type="submit" value="등록하기" class="button">
     </form>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let dateInput = document.getElementById("first_publication");
 
-        // 오늘 날짜 가져오기 (YYYY-MM-DD 형식)
-        let today = new Date().toISOString().split("T")[0];
-
-        // 최대 날짜를 오늘로 설정
-        dateInput.setAttribute("max", today);
-
-        // 사용자가 미래 날짜를 선택할 경우 자동으로 현재 날짜로 조정
-        dateInput.addEventListener("change", function() {
-            if (dateInput.value > today) {
-                alert("발행일은 오늘보다 미래 날짜를 선택할 수 없습니다.");
-                dateInput.value = today;
-            }
-        });
-    });
 </script>
 </html>

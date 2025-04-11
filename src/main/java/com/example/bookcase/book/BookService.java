@@ -44,7 +44,7 @@ public class BookService {
                        BigDecimal price,
                        String author,
                        String publisher,
-                       LocalDate first_publication,
+                       LocalDateTime first_publication,
                        String isbn) {
         Book b = new Book();
         b.setTitle(title);
@@ -72,7 +72,7 @@ public class BookService {
                        BigDecimal price,
                        String author,
                        String publisher,
-                       LocalDate first_publication) {
+                       LocalDateTime first_publication) {
         Book b = new Book();
         b.setTitle(title);
         b.setLanguage(language);
@@ -165,53 +165,51 @@ public class BookService {
             }
         };
     }
-//        List<Book> books = this.bookRepository.findByTitleAuthor(title, author);
-//        if (books != null) {
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
-//
-//    public List<Book> getBookExistTA(String title, String author) {
-//        List<Book> books = this.bookRepository.findByTitleAuthor(title, author);
-//        return books;
-//    }
-
-//    public Book getBook(Integer id) {
-//        Optional<Book> book = this.bookRepository.findById(id);
-//        if (book.isPresent()) {
-//            return book.get();
-//        } else {
-//            throw new DataNotFoundException("book not found");
-//        }
-//    }
-//
-//    public Book getBookByTitle(String title) {
-//        Optional<Book> book = this.bookRepository.findBytitle(title);
-//        if (book.isPresent()) {
-//            return book.get();
-//        } else {
-//            throw new DataNotFoundException("book not found");
-//        }
-//    }
-//
-//    public Book getBookByAuthor(String author) {
-//        Optional<Book> book = this.bookRepository.findByauthor(author);
-//        if (book.isPresent()) {
-//            return book.get();
-//        } else {
-//            throw new DataNotFoundException("book not found");
-//        }
-//    }
-//
-//    public Page<Book> getListByTitle(String title) {
-//        List<Sort.Order> sorts = new ArrayList();
-//        return this.bookRepository.findBytitle(siteUser, pageable);
-//    }
-//
+/*
+        List<Book> books = this.bookRepository.findByTitleAuthor(title, author);
+        if (books != null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 
+    public List<Book> getBookExistTA(String title, String author) {
+        List<Book> books = this.bookRepository.findByTitleAuthor(title, author);
+        return books;
+    }
+    public Book getBook(Integer id) {
+        Optional<Book> book = this.bookRepository.findById(id);
+        if (book.isPresent()) {
+            return book.get();
+        } else {
+            throw new DataNotFoundException("book not found");
+        }
+    }
 
+    public Book getBookByTitle(String title) {
+        Optional<Book> book = this.bookRepository.findBytitle(title);
+        if (book.isPresent()) {
+            return book.get();
+        } else {
+            throw new DataNotFoundException("book not found");
+        }
+    }
 
+    public Book getBookByAuthor(String author) {
+        Optional<Book> book = this.bookRepository.findByauthor(author);
+        if (book.isPresent()) {
+            return book.get();
+        } else {
+            throw new DataNotFoundException("book not found");
+        }
+    }
+
+    public Page<Book> getListByTitle(String title) {
+        List<Sort.Order> sorts = new ArrayList();
+        return this.bookRepository.findBytitle(siteUser, pageable);
+    }
+
+*/
 }

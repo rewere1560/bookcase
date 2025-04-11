@@ -3,7 +3,7 @@
     <h5 class="my-3 border-bottom pb-2">도서 추가</h5>
     <div>
         <div class="mt-3">
-            <div class="d-flex justify-content-start border p-2">
+            <div class="d-flex justify-content-start border p-2" style="overflow-x: auto; white-space: nowrap;">
                 <div th:each="book : ${bookList}" class="book">
                     <form th:action="@{/collection/add/book}" method="post">
                         <input type="hidden" name="id" th:value="${book.id}">
