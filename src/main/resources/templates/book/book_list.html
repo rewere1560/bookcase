@@ -1,84 +1,97 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content" class="container_mo my-3 mar">
-  <a href="/" class="nn d-inline-flex"><h2>책장</h2></a>
-  <div class="row my-3">
-    <div class="col-6">
-      <div class="button">
-        <a th:href="@{/book/enroll}">도서 등록하기</a>
-      </div>
+    <a href="/" class="nn d-inline-flex"><h2>책장</h2></a>
+    <div class="row my-3">
+        <div class="col-6">
+            <div class="button">
+                <a th:href="@{/book/enroll}">도서 등록하기</a>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group">
+                <input type="text" id="search_kw" class="form-control" th:value="${kw}">
+                <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+            </div>
+        </div>
     </div>
-    <div class="col-6">
-      <div class="input-group">
-        <input type="text" id="search_kw" class="form-control" th:value="${kw}">
-        <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-      </div>
-    </div>
-  </div>
-  <table class="table">
-    <thead class="table-dark">
-    <tr class="text-center">
-      <th>번호</th>
-      <th style="width:50%">제목</th>
-      <th>저자</th>
-      <th>출판사</th>
-    </tr>
-    </thead>
-    <tbody>
+    <table class="table">
+        <thead class="table-dark">
+        <tr class="text-center">
+            <th>번호</th>
+            <th style="width:50%">제목</th>
+            <th>저자</th>
+            <th>출판사</th>
+        </tr>
+        </thead>
+        <tbody>
 
-    <tr class="text-center" th:each="book, loop : ${paging}"><!--${bookList}-->
-      <td th:text="${loop.count}"></td>
-      <td class="text-start">
-        <a th:href="@{|/book/detail?id=${book.id}|}"
-           th:text="${book.title}" class="nn">
-        </a>
-      </td>
-      <td th:text="${book.author}"></td>
-      <td th:text="${book.publisher}"></td>
-    </tr>
-    </tbody>
-  </table>
-  <!-- 페이징처리 시작 -->
-  <div th:if="${!paging.isEmpty()}">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-        <a class="page-link"
-           href="javascript:void(0)" th:data-page="${paging.number-1}">
-          <span>이전</span>
-        </a>
-      </li>
-      <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-          th:if="${page >= paging.number-5 and page <= paging.number+5}"
-          th:classappend="${page == paging.number} ? 'active'"
-          class="page-item">
-        <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
-      </li>
-      <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-        <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
-          <span>다음</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-  <!-- 페이징처리 끝 -->
-  <!--    <a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>-->
-  <form th:action="@{/book/list}" method="get" id="searchForm">
-    <input type="hidden" id="kw" name="kw" th:value="${kw}">
-    <input type="hidden" id="page" name="page" th:value="${paging.number}">
-  </form>
+        <tr class="text-center" th:each="book, loop : ${paging}"><!--${bookList}-->
+            <td th:text="${loop.count}"></td>
+            <td class="text-start">
+                <a th:href="@{|/book/detail?id=${book.id}|}"
+                   th:text="${book.title}" class="nn">
+                </a>
+            </td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.publisher}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <div th:if="${!paging.isEmpty()}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a class="page-link"
+                   href="javascript:void(0)" th:data-page="${paging.number-1}">
+                    <span>이전</span>
+                </a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                th:classappend="${page == paging.number} ? 'active'"
+                class="page-item">
+                <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
+            </li>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
+                    <span>다음</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 페이징처리 끝 -->
+    <!--  col-sm-3-->
+    <div class="row">
+        <div class="col" th:each="book, loop : ${paging}">
+            <div class="card" style="width: 18rem;">
+                <!--      <img src="..." class="card-img-top" alt="...">-->
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${book.title}">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    <a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>-->
+    <form th:action="@{/book/list}" method="get" id="searchForm">
+        <input type="hidden" id="kw" name="kw" th:value="${kw}">
+        <input type="hidden" id="page" name="page" th:value="${paging.number}">
+    </form>
 </div>
 <script layout:fragment="script" type='text/javascript'>
-  const page_elements = document.getElementsByClassName("page-link");
-  Array.from(page_elements).forEach(function(element) {
-      element.addEventListener('click', function() {
-          document.getElementById('page').value = this.dataset.page;
-          document.getElementById('searchForm').submit();
-      });
-  });
-  const btn_search = document.getElementById("btn_search");
-  btn_search.addEventListener('click', function() {
-      document.getElementById('kw').value = document.getElementById('search_kw').value;
-      document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
-      document.getElementById('searchForm').submit();
-  });
+    const page_elements = document.getElementsByClassName("page-link");
+    Array.from(page_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            document.getElementById('page').value = this.dataset.page;
+            document.getElementById('searchForm').submit();
+        });
+    });
+    const btn_search = document.getElementById("btn_search");
+    btn_search.addEventListener('click', function() {
+        document.getElementById('kw').value = document.getElementById('search_kw').value;
+        document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+        document.getElementById('searchForm').submit();
+    });
 </script>
 </html>

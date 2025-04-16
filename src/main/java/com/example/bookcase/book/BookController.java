@@ -46,6 +46,23 @@ public class BookController {
         return "book/book_list";
     }
 
+    @GetMapping("/list/card")
+    public String cardList(Model model) {
+        List<Book> bookList = this.bookService.getList();
+        model.addAttribute("pageTitle", "책 카드 리스트");
+        model.addAttribute("bookList", bookList);
+        model.addAttribute("scrollHorizontal", true);
+//        List<Book> bookList = bookService.getList();
+//        model.addAttribute("bookList", bookList);
+//        Page<Question> paging = this.questionService.getList(page, kw);
+//        List<Category> categoryList = this.categoryService.getAll();
+//        model.addAttribute("paging", paging);
+//        model.addAttribute("kw", kw);
+//        model.addAttribute("category_list", categoryList);
+        return "book/book_cardList";
+    }
+
+
 //    @GetMapping(value = "/search")
 //    public String search(Model model, @RequestParam(value="page", defaultValue="0") int page,
 //                         @RequestParam(value = "kw", defaultValue = "") String kw) {

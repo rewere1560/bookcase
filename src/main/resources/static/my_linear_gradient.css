@@ -1,14 +1,16 @@
 .grad {
-  width: 800px;
+  width: 90%;
+  max-width: 1800px;
   height: auto;
-  margin-top: 37px;
-  margin-right: 75px;
-  margin-left: 75px;
+  margin: 37px auto 0;
+
   padding: 20px;
   border-radius: 10px;  /* 둥근 모서리 */
 }
 
-
+/*margin-top: 37px;
+    margin-right: 75px;
+    margin-left: 75px;*/
 
 #back {
     background-image: linear-gradient(rgb(89, 208, 255), rgb(255,255,255));
