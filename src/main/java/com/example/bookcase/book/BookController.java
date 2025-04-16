@@ -8,6 +8,7 @@ import com.example.bookcase.user.SiteUser;
 import com.example.bookcase.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.parameters.P;
@@ -47,7 +48,7 @@ public class BookController {
     }
 
     @GetMapping("/list/card")
-    public String cardList(Model model) {
+    public String cardList(@NotNull Model model) {
         List<Book> bookList = this.bookService.getList();
         model.addAttribute("pageTitle", "책 카드 리스트");
         model.addAttribute("bookList", bookList);
@@ -97,14 +98,14 @@ public class BookController {
 
     @PreAuthorize(value = "isAuthenticated()")
     @GetMapping(value = "/enroll")
-    public String enroll(Model model, BookEnrollForm bookEnrollForm) {
+    public String enroll(@NotNull Model model, BookEnrollForm bookEnrollForm) {
         model.addAttribute("pageTitle", "책 등록");
         model.addAttribute("bookEnrollForm", bookEnrollForm);
         return "book/book_enroll";
     }
 
     @PostMapping(value = "/enroll")
-    public String enroll(@Valid BookEnrollForm bookEnrollForm, BindingResult bindingResult,
+    public String enroll(@Valid BookEnrollForm bookEnrollForm, @NotNull BindingResult bindingResult,
                          Model model, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "book/book_enroll";
@@ -123,7 +124,7 @@ public class BookController {
 
 //    @PreAuthorize("isAuthenticated()")
     @GetMapping("/recommend/{id}")
-    public String recommendBook(Principal principal, @PathVariable("id") Integer id) {
+    public String recommendBook(@NotNull Principal principal, @PathVariable("id") Integer id) {
         Book book = this.bookService.getBook(id);
         SiteUser siteUser = this.userService.getUser(principal.getName());
 //        this.recommendService.recommend(book, siteUser);
