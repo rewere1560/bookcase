@@ -11,13 +11,13 @@
                 </div>
                 <div class="col-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
                         <label class="form-check-label" for="flexRadioDefault1">
                             가로 스크롤
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                         <label class="form-check-label" for="flexRadioDefault2">
                             세로 스크롤
                         </label>
@@ -48,14 +48,14 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <div th:class="${scrollHorizontal} ? 'scroll-grid-x' : 'scroll-grid-y'">
+    <div id="grid-axis" th:class="${scrollHorizontal} ? 'scroll-grid-x' : 'scroll-grid-y'">
         <div th:each="book, loop : ${bookList}" >
             <div th:id="|book${loop.count}|" class="card" style="width: 18rem;">
                 <!--      <img src="..." class="card-img-top" alt="...">-->
                 <div class="card-body">
                     <h5 class="card-title" th:text="${book.title}">title</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a th:href="|#book${loop.count}|" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
@@ -103,5 +103,20 @@
       }
     }
   });
+
+    let gridAxis = document.getElementById('grid-axis');
+    // 가로 스크롤 라디오 버튼 클릭 이벤트
+    document.getElementById('flexRadioDefault1').addEventListener('click', function() {
+         gridAxis.classList.remove('scroll-grid-y');  // 기존의 세로 스크롤 클래스 제거
+         gridAxis.classList.add('scroll-grid-x');     // 가로 스크롤 클래스 추가
+    });
+
+    // 세로 스크롤 라디오 버튼 클릭 이벤트
+    document.getElementById('flexRadioDefault2').addEventListener('click', function() {
+         gridAxis.classList.remove('scroll-grid-x');  // 기존의 가로 스크롤 클래스 제거
+         gridAxis.classList.add('scroll-grid-y');     // 세로 스크롤 클래스 추가
+
+    });
+</script>
 </script>
 </html>
