@@ -76,6 +76,7 @@ public class BookController {
     @GetMapping(value="/detail")
     public String detail(Model model, SelectBookForm selectBookForm,
                          @RequestParam("id") Integer id,
+                         @RequestParam(value="before", required=false) String before,
                          @RequestParam(value="collection", required=false) Integer collectionId,
                          @RequestParam(value="collectionList", required=false) String collectionList) {
 
@@ -86,6 +87,9 @@ public class BookController {
             model.addAttribute("collection", myCollection);
             model.addAttribute("fromCollection", collectionId);
             model.addAttribute("from", collectionList);
+        }
+        if ("mList".equals(before)) {
+            model.addAttribute("fromMList", true);
         }
         Book book = this.bookService.getBook(id);
         selectBookForm.setBook(book);

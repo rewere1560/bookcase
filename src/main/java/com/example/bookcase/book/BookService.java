@@ -4,6 +4,7 @@ import com.example.bookcase.DataNotFoundException;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,11 +15,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-
+import java.util.*;
 
 
 @Slf4j
@@ -29,6 +26,16 @@ public class BookService {
 
     public List<Book> getList() {
         return this.bookRepository.findAll();
+    }
+
+    public List<Book> getRandomList() {
+        List<Book> books = new ArrayList<>();
+        return books;
+    }
+
+    public List<Book> getListByRecommend() {
+        List<Book> books = new ArrayList<>();
+        return books;
     }
 
     public Page<Book> getList(int page, String kw) {

@@ -9,7 +9,11 @@
         </div>
         <div th:if="${fromCollection} != null" class="col-1">
             <a th:href="@{|/collection/detail/${fromCollection}?collectionList=${from}|}"
-               class="nav-link" style="color: gray" th:text="이전" th:title="|${collection.name}으로 이동|"></a>
+               class="nav-link" style="color: gray" text="이전" th:title="|${collection.name}으로 이동|"></a>
+        </div>
+        <div th:if="${fromMList}" class="col-1">
+            <a th:href="@{|/main/list/#book${book.id}|}"
+               class="nav-link" style="color: gray" text="이전" title="메인 리스트로 이동"></a>
         </div>
     </div>
     <div class="card my-3">
