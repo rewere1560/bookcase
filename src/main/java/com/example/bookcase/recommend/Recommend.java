@@ -28,8 +28,6 @@ public class Recommend {
     @JoinColumn(name = "target")
     private RecommendationTarget target;
 
-    private Integer targetId;
-
     @Column(columnDefinition = "integer default 0")
     @NotNull
     private Integer recommendNumber = 0;
@@ -40,6 +38,6 @@ public class Recommend {
 
     public void setTarget(RecommendationTarget target) {
         this.target = target;
-        this.targetId = target.getId();
+
     }
 }

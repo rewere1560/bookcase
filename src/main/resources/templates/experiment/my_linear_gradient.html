@@ -3,8 +3,14 @@
 <head>
     <title>linear-gradient</title>
     <link rel="stylesheet" type="text/css" th:href="@{/my_linear_gradient.css}">
+    <style>
+        body {
+          display: flex;
+          transition: background-color 1s;
+        }
+    </style>
 </head>
-<body id="back">
+<body id="">
 <div>
     <div class="outer_div">
         <div class="my_gradient_1"></div>
@@ -41,5 +47,21 @@
         <p>linear-gradient(to top left, red, yellow)</p>
     </div>
 </div>
+
+
 </body>
+<script>
+    function getRandomColor() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    setInterval(() => {
+      document.body.style.backgroundColor = getRandomColor();
+    }, 100); // 1초마다 색 변경
+</script>
+
+
 </html>

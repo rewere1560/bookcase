@@ -1,4 +1,4 @@
-package com.example.bookcase;
+package com.example.bookcase.experiment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BackgroundController {
     @GetMapping(value="/one")
     public String back() {
-        return "my_linear_gradient";
+        return "experiment/my_linear_gradient";
     }
 }

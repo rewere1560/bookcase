@@ -51,7 +51,7 @@ public class RecommendService {
         r.setFirst_recommedDate(LocalDateTime.now());
         r.setType(type);
         r.setTarget(target);
-        r.setTargetId(target.getId());
+
     }
 
     public void enrollRecommend(String title,

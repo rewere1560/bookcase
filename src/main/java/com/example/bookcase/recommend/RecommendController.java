@@ -114,6 +114,7 @@ public class RecommendController {
                          @RequestParam(value="target", required=false) String target,
                          Principal principal, Model model, RecommendForm recommendForm) {
         if (bindingResult.hasErrors() || bindingResult2.hasErrors()) {
+            model.addAttribute("bookList", bookService.getList());
             model.addAttribute("target", target);
             return "recommend/recommend_form";
         }

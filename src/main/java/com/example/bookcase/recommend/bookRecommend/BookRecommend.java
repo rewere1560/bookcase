@@ -8,6 +8,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
+@DiscriminatorValue("book")
 public class BookRecommend extends RecommendationTarget {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

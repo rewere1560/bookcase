@@ -10,7 +10,7 @@ import javax.annotation.processing.Generated;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) // 상속 전략 지정
-@DiscriminatorColumn(name = "target_type")
+@DiscriminatorColumn
 public abstract class RecommendationTarget {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
