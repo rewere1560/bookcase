@@ -11,13 +11,13 @@
                 </div>
                 <div class="col-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                         <label class="form-check-label" for="flexRadioDefault1">
                             가로 스크롤
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                         <label class="form-check-label" for="flexRadioDefault2">
                             세로 스크롤
                         </label>
@@ -48,25 +48,14 @@
 <!--        </div>-->
 <!--    </div>-->
 
-<!--    Some quick example text to build on the card title and make up the bulk of the card's content.-->
-
-    <div id="grid-axis" th:class="${scrollHorizontal} ? 'scroll-grid-x' : 'scroll-grid-y'">
+    <div th:class="${scrollHorizontal} ? 'scroll-grid-x' : 'scroll-grid-y'">
         <div th:each="book, loop : ${bookList}" >
             <div th:id="|book${loop.count}|" class="card" style="width: 18rem;">
                 <!--      <img src="..." class="card-img-top" alt="...">-->
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h5 class="card-title" th:text="${book.title}">title</h5>
-                        <a th:href="|#book${loop.count}|" class="btn btn-secondary">@</a>
-                    </div>
-
-                    <p class="card-text">
-                        <div th:text="|${book.author}|"></div>
-                        <div th:text="|${book.publisher}|"></div>
-
-                    </p>
-                    <a th:href="|/book/detail?id=${book.id}|" class="btn btn-outline-secondary">자세히 보기</a>
-
+                    <h5 class="card-title" th:text="${book.title}">title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
@@ -114,121 +103,5 @@
       }
     }
   });
-
-    let gridAxis = document.getElementById('grid-axis');
-    // 가로 스크롤 라디오 버튼 클릭 이벤트
-    document.getElementById('flexRadioDefault1').addEventListener('click', function() {
-         gridAxis.classList.remove('scroll-grid-y');  // 기존의 세로 스크롤 클래스 제거
-         gridAxis.classList.add('scroll-grid-x');     // 가로 스크롤 클래스 추가
-    });
-
-    // 세로 스크롤 라디오 버튼 클릭 이벤트
-    document.getElementById('flexRadioDefault2').addEventListener('click', function() {
-         gridAxis.classList.remove('scroll-grid-x');  // 기존의 가로 스크롤 클래스 제거
-         gridAxis.classList.add('scroll-grid-y');     // 세로 스크롤 클래스 추가
-
-    });
-
-
-function smoothScrollElementByX(el, distance, duration, onDone) {
-  const start = el.scrollLeft;
-  const startTime = performance.now();
-
-  function scroll(currentTime) {
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    el.scrollLeft = start + distance * easeInOutQuad(progress);
-
-    if (progress < 1) {
-      requestAnimationFrame(scroll);
-    } else if (onDone) {
-      onDone();
-    }
-  }
-
-  requestAnimationFrame(scroll);
-
-  function easeInOutQuad(t) {
-    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-  }
-}
-
- function smoothScrollElementByY(el, distance, duration, onDone) {
-    const start = el.scrollTop;
-    const startTime = performance.now();
-
-    function scroll(currentTime) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      el.scrollTop = start + distance * easeInOutQuad(progress);
-
-      if (progress < 1) {
-        requestAnimationFrame(scroll);
-      } else if (onDone) {
-        onDone();
-      }
-    }
-
-    requestAnimationFrame(scroll);
-
-    function easeInOutQuad(t) {
-      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-    }
-  }
-
-
-function startScrollXLoopForElement(elementId, interval, scrollDistance) {
-  const el = document.getElementById(elementId);
-
-  function scrollStep() {
-    smoothScrollElementByX(el, scrollDistance, 1000, () => {
-      const atRight = el.scrollLeft + el.clientWidth >= el.scrollWidth;
-
-      if (atRight) {
-        setTimeout(() => {
-          el.scrollTo({ left: 0, behavior: 'smooth' });
-          setTimeout(scrollStep, interval);
-        }, interval / 10);
-      } else {
-        setTimeout(scrollStep, interval);
-      }
-    });
-  }
-
-  scrollStep();
-}
-
- function startScrollYLoopForElement(elementId, interval, scrollDistance) {
-    const el = document.getElementById(elementId);
-
-    function scrollStep() {
-      smoothScrollElementByY(el, scrollDistance, 1000, () => {
-        const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight;
-
-        if (atBottom) {
-          setTimeout(() => {
-            el.scrollTo({ top: 0, behavior: 'smooth' });
-            setTimeout(scrollStep, interval);
-          }, interval / 10);
-        } else {
-          setTimeout(scrollStep, interval);
-        }
-      });
-    }
-
-    scrollStep();
-  }
-
-window.onload = function () {
-  setTimeout(() => {
-    startScrollXLoopForElement("grid-axis", 2500, 304);
-  }, 2000); // 2.5초 후에 스크롤 시작
-
-  setTimeout(() => {
-    startScrollYLoopForElement("grid-axis", 2000, 206);
-  }, 1500); // 2.5초 후에 스크롤 시작
-};
-
-</script>
 </script>
 </html>
