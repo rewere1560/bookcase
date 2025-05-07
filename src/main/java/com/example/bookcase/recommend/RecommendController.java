@@ -2,6 +2,9 @@ package com.example.bookcase.recommend;
 
 import com.example.bookcase.book.Book;
 import com.example.bookcase.book.BookService;
+import com.example.bookcase.myCollection.MyCollection;
+import com.example.bookcase.recommend.bookRecommend.BookRecommend;
+import com.example.bookcase.recommend.bookRecommend.BookRecommendService;
 import com.example.bookcase.recommend.recommendForm.RecommendBaseForm;
 import com.example.bookcase.recommend.recommendForm.RecommendBookForm;
 import com.example.bookcase.recommend.recommendForm.RecommendForm;
@@ -18,8 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 @RequestMapping("/recommend")
@@ -29,7 +31,24 @@ public class RecommendController {
 
     private final UserService userService;
     private final RecommendService recommendService;
+    private final BookRecommendService bookRecommendService;
     private final BookService bookService;
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping(value = "/list")
+    public String list(Model model, Principal principal) {
+
+        SiteUser user = this.userService.getUser(principal.getName());
+        List<Recommend> recommendList = this.recommendService.getList();
+
+
+
+//        List<MyCollection> collectionList = this.collectionService.getListByOwner(user);
+//        model.addAttribute("collectionList", collectionList);
+
+        model.addAttribute("pageTitle", "묶음 리스트");
+        return "recommend/recommend_list";
+    }
 
 
     @PreAuthorize(value = "isAuthenticated()")
@@ -79,11 +98,14 @@ public class RecommendController {
             Book book = bookService.getBook(id);
             model.addAttribute("bookId", id);
             model.addAttribute("bookTitle", book.getTitle());
+            recommendBookForm.setBookId(id);
             recommendBookForm.setTitle(book.getTitle());
             recommendBookForm.setLanguage(book.getLanguage());
             recommendBookForm.setPrice(book.getPrice());
             recommendBookForm.setAuthor(book.getAuthor());
             recommendBookForm.setPublisher(book.getPublisher());
+
+            System.out.println("(id input dDddddddddddddddd)id: " + id);
         } else {
             model.addAttribute("bookTitle", "없음");
         }
@@ -118,22 +140,41 @@ public class RecommendController {
             model.addAttribute("target", target);
             return "recommend/recommend_form";
         }
+
+        Integer id = recommendBookForm.getBookId();
+        String title = recommendBookForm.getTitle();
+        if(id != null) {
+            System.out.println("id exist dddddddddddddddddddddddddddddd");
+        } else if(id == null) {
+            System.out.println("id n exist dddddddddddddddddddddddddddddd");
+        }
+        if(title != null) {
+            System.out.println("t exist dddddddddddddddddddddddddddddd");
+        } else if(title == null) {
+            System.out.println("t n exist dddddddddddddddddddddddddddddd");
+        }
         if ("BOOK".equals(target)) {
+
 ////            RecommendBookForm recommendBookForm = (RecommendBookForm) recommendForm;
 //            return "redirect:/recommend/enroll?root=1&target=" + target;
             SiteUser siteUser = this.userService.getUser(principal.getName());
+            Book book = this.bookService.getBook(id);
+            BookRecommend bookRecommend = this.bookRecommendService.create(book);
+            this.recommendService.enrollRecommend(RecommendationType.valueOf("BOOK"), bookRecommend, siteUser);
 //            this.recommendService.enrollBookRecommend(recommendBookForm.getTitle(),
 //                    recommendBookForm.getLanguage(),
 //                    recommendBookForm.getPrice(),
 //                    recommendBookForm.getAuthor(),
 //                    recommendBookForm.getPublisher(),
 //                    siteUser);
+            return "redirect:/";
         } else if ("AUTHOR".equals(target)) {
             //RecommendAuthorForm recommendAuthorForm = (RecommendAuthorForm) recommendForm;
 
         } else {
             return "redirect:/recommend/enroll?root=else&target=" + target;
         }
+
         return "redirect:/recommend/select?ignore=book";
 //        return "redirect:";
     }

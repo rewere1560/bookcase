@@ -32,11 +32,13 @@ public class BookController {
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value="page", defaultValue="0") int page,
-                         @RequestParam(value = "kw", defaultValue = "") String kw) {
-        Page<Book> paging = this.bookService.getList(page, kw);
+                         @RequestParam(value = "kw", defaultValue = "") String kw,
+                       @RequestParam(value = "target", defaultValue = "") String target) {
+        Page<Book> paging = this.bookService.getList(page, kw, target);
         model.addAttribute("pageTitle", "책 리스트");
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
+        model.addAttribute("target", target);
 //        List<Book> bookList = bookService.getList();
 //        model.addAttribute("bookList", bookList);
 //        Page<Question> paging = this.questionService.getList(page, kw);

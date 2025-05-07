@@ -1,0 +1,63 @@
+use bookcase;
+
+DELIMITER $$
+CREATE PROCEDURE insert_dummy_books()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+
+    WHILE i < 100 DO
+        INSERT INTO book (author, create_date, first_publication, isbn, language, modify_date, price, publisher, title)
+        VALUES (
+            CONCAT('Author ', i),
+            NOW(),
+            DATE_ADD(NOW(), INTERVAL -FLOOR(RAND() * 3000) DAY),
+            CONCAT(
+				'978-',
+				LPAD(FLOOR(RAND() * 90) + 10, 2, '0'), '-',       -- 2자리 (10~99)
+				LPAD(FLOOR(RAND() * 90000) + 10000, 5, '0'), '-', -- 5자리 (10000~99999)
+				LPAD(FLOOR(RAND() * 90) + 10, 2, '0'), '-',       -- 2자리 (10~99)
+				FLOOR(RAND() * 10)                                -- 1자리 (0~9)
+			)
+			,
+            IF(RAND() > 0.5, 'English', 'Korean'),
+            NOW(),
+            ROUND(RAND() * 1000, 0),
+            CONCAT('Publisher ', i),
+            CONCAT('Book Title ', i)
+        );
+
+        SET i = i + 1;
+    END WHILE;
+END$$
+
+DELIMITER ;
+call insert_dummy_books();
+select * from book;
+
+insert into recommend (user_id, first_recommed_date, recent_recommed_date, recommend_number, type, target, target_id)
+
+DROP TABLE recommend;
+DROP TABLE recommendation_target;
+
+INSERT INTO recommendation_target (book_id, dtype)
+VALUES (101, 'book');
+
+SET SQL_SAFE_UPDATES = 0;
+SET SQL_SAFE_UPDATES = 1;
+delete from book;
+select * from book;
+call insert_dummy_books();
+DROP PROCEDURE IF EXISTS insert_dummy_books;
+
+
+
+
+insert into recommend (user_id, first_recommed_date, recent_recommed_date, recommend_number, type, target)
+value (
+	1,
+    NOW(),
+	NOW(),
+    1,
+    'BOOK',
+    1
+    );

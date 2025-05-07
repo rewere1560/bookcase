@@ -46,6 +46,36 @@ public class BookService {
         return this.bookRepository.findAll(spec, pageable);
     }
 
+    public Page<Book> getList(int page, String kw, String target) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("firstPublication"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        System.out.println("선택된 검색 대상: " + target); // 콘솔 출력
+
+        Specification<Book> spec;
+        if ("book".equals(target)) {
+            spec = search_T(kw);
+            System.out.println("book Specification"); // 콘솔 출력
+        } else if ("author".equals(target)) {
+            spec = search_A(kw);
+            System.out.println("author Specification"); // 콘솔 출력
+        } else if ("publisher".equals(target)) {
+            spec = search_P(kw);
+        } else {
+            spec = search(kw);
+        }
+
+
+//        else if (target == "publisher") {
+//            Specification<Book> spec = search_P(kw);
+//            return this.bookRepository.findAll(spec, pageable);
+//        }
+
+
+
+        return this.bookRepository.findAll(spec, pageable);
+    }
+
     public void enroll(String title,
                        String language,
                        BigDecimal price,
@@ -152,23 +182,50 @@ public class BookService {
         return this.bookRepository.existsByTitleAndAuthor(title, author);
     }
 
+    private Specification<Book> search(String kw) {
+        return new Specification<>() {
+            private static final long serialVersionUID = 1L;
+            @Override
+            public Predicate toPredicate(Root<Book> b, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                query.distinct(true);  // 중복을 제거
+                return cb.or(
+                        cb.like(cb.lower(b.get("title")), "%" + kw.toLowerCase() + "%"),
+                        cb.like(cb.lower(b.get("author")), "%" + kw.toLowerCase() + "%"),
+                        cb.like(cb.lower(b.get("publisher")), "%" + kw.toLowerCase() + "%")
+                );
+            }
+        };
+    }
+
     private Specification<Book> search_T(String kw) {
         return new Specification<>() {
             private static final long serialVersionUID = 1L;
             @Override
             public Predicate toPredicate(Root<Book> b, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 query.distinct(true);  // 중복을 제거
-//                Join<Book, String> t = b.join("title", JoinType.LEFT);
-//                Join<Book, String> lang = b.join("language", JoinType.LEFT);
-//                Join<Book, String> pr = b.join("price", JoinType.LEFT);
-//                Join<Book, String> a = b.join("author", JoinType.LEFT);
-//                Join<Book, String> pb = b.join("publisher", JoinType.LEFT);
-//                Join<Book, String> fp = b.join("first_publication", JoinType.LEFT);
                 return cb.or(cb.like(b.get("title"), "%" + kw + "%")); // 제목
-//                        cb.like(b.get("content"), "%" + kw + "%"),      // 내용
-//                        cb.like(u1.get("username"), "%" + kw + "%"),    // 질문 작성자
-//                        cb.like(a.get("content"), "%" + kw + "%"),      // 답변 내용
-//                        cb.like(u2.get("username"), "%" + kw + "%"));   // 답변 작성자
+            }
+        };
+    }
+
+    private Specification<Book> search_A(String kw) {
+        return new Specification<>() {
+            private static final long serialVersionUID = 1L;
+            @Override
+            public Predicate toPredicate(Root<Book> b, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                query.distinct(true);  // 중복을 제거
+                return cb.or(cb.like(b.get("author"), "%" + kw + "%")); // 저자
+            }
+        };
+    }
+
+    private Specification<Book> search_P(String kw) {
+        return new Specification<>() {
+            private static final long serialVersionUID = 1L;
+            @Override
+            public Predicate toPredicate(Root<Book> b, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                query.distinct(true);  // 중복을 제거
+                return cb.or(cb.like(b.get("publisher"), "%" + kw + "%")); // 저자
             }
         };
     }

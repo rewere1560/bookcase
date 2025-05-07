@@ -17,13 +17,22 @@ import java.util.Optional;
 public class BookRecommendService {
 
     private final BookRecommendRepository bookRecommendRepository;
-    private final BookService bookService;
     private final BookRepository bookRepository;
+    private final BookService bookService;
 
-    public void create(Book book) {
-        BookRecommend brc = new BookRecommend();
-        brc.setBook(book);
-        bookRecommendRepository.save(brc);
+
+    public BookRecommend create(Book book) {
+        BookRecommend brc;
+        Boolean recommend_exist = this.bookRecommendRepository.existsByBook(book);
+        if(recommend_exist) {
+            brc = this.getByBook(book);
+        } else {
+            brc = new BookRecommend();
+            brc.setBook(book);
+            bookRecommendRepository.save(brc);
+        }
+
+        return brc;
     }
 
 

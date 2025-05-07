@@ -35,4 +35,5 @@ public class RecommendBookForm {
     @NotEmpty(message="출판사의 이름은 필수항목입니다.")
     private String publisher;
 
+    private Integer bookId;
 }

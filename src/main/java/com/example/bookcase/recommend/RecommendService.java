@@ -15,7 +15,7 @@ import org.thymeleaf.standard.serializer.IStandardJavaScriptSerializer;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -42,6 +42,11 @@ public class RecommendService {
 //        recommend.setTarget();
 //
 //    }
+    public List<Recommend> getList() {
+        return this.recommendRepository.findAll();
+    }
+
+
 
     public void enrollRecommend(RecommendationType type,
                                 RecommendationTarget target,
@@ -51,7 +56,7 @@ public class RecommendService {
         r.setFirst_recommedDate(LocalDateTime.now());
         r.setType(type);
         r.setTarget(target);
-
+        recommendRepository.save(r);
     }
 
     public void enrollRecommend(String title,
